@@ -117,11 +117,14 @@ export default function ForoPage() {
           });
         } else {
              // User might not have posts yet, or posts with 0 likes.
-             // Create a default stat for them.
+            // Create a default stat for them.
+             // Aseguramos que user.uid sea un string antes de usarlo.
+             const userId = user.uid || ''; // Si user.uid es undefined, lo asignamos a un string vacío.
+
              setCurrentUserRankingInfo({
                 rank: sortedAuthors.length + 1, // They are after everyone else for now
                 stats: {
-                    id: user.uid,
+                    id: userId, // <--- Aquí usamos la variable 'userId'
                     name: user.displayName || 'Tú',
                     avatarUrl: user.photoURL || undefined,
                     totalLikes: 0, // Default to 0 if no posts or likes
@@ -299,5 +302,4 @@ export default function ForoPage() {
       )}
     </div>
   )
-
-    
+} 
